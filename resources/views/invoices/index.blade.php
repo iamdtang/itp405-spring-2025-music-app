@@ -25,7 +25,9 @@
           <tr>
             <td>{{ $invoice->InvoiceDate }}</td>
             <td>{{ $invoice->InvoiceId }}</td>
-            <td></td>
+            <td>
+              {{ $invoice->FirstName }} {{ $invoice->LastName }}
+            </td>
             <td>${{ $invoice->Total }}</td>
           </tr>
         @endforeach

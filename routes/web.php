@@ -7,7 +7,11 @@ Route::get('/', function () {
 });
 
 Route::get('/invoices', function () {
-    $invoices = DB::table('invoices')->get(); // SELECT * FROM invoices
+    $invoices = DB::table('invoices')
+        ->join('customers', 'invoices.CustomerId', '=', 'customers.CustomerId')
+        ->orderBy('invoices.InvoiceDate', 'DESC')
+        ->get();
+
     // dd($invoices);
 
     return view('invoices/index', [
