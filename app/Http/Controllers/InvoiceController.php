@@ -15,7 +15,7 @@ class InvoiceController extends Controller
             ->get();
         // dd($invoices);
 
-        return view('invoices/index', [
+        return view('invoices.index', [
             'invoices' => $invoices,
             'invoiceCount' => count($invoices),
         ]);
@@ -27,7 +27,7 @@ class InvoiceController extends Controller
             ->where('InvoiceId', '=', $invoiceId)
             ->first();
 
-        return view('invoices/show', [
+        return view('invoices.show', [
             'invoice' => $invoice,
         ]);
     }
