@@ -20,7 +20,7 @@
             <td>{{ $invoice->InvoiceDate }}</td>
             <td>{{ $invoice->InvoiceId }}</td>
             <td>
-              {{ $invoice->FirstName }} {{ $invoice->LastName }}
+              {{ $invoice->customer->FirstName }} {{ $invoice->customer->LastName }}
             </td>
             <td>${{ $invoice->Total }}</td>
           </tr>
