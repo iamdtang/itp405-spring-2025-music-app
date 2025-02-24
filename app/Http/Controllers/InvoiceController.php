@@ -20,9 +20,11 @@ class InvoiceController extends Controller
 
     public function show($invoiceId)
     {
-        $invoice = DB::table('invoices')
-            ->where('InvoiceId', '=', $invoiceId)
-            ->first();
+        $invoice = Invoice::with([
+            'invoiceItems.track',
+            'invoiceItems.track.album',
+            'invoiceItems.track.album.artist',
+        ])->find($invoiceId);
 
         return view('invoices.show', [
             'invoice' => $invoice,
