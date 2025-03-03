@@ -18,15 +18,18 @@ Route::get('/', function () {
 
 Route::get('/register', [RegistrationController::class, 'index'])->name('registration.index');
 Route::post('/register', [RegistrationController::class, 'register'])->name('registration.create');
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
-Route::get('/login', [AuthController::class, 'loginForm'])->name('auth.loginForm');
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login'); // intentionally named "login" per "auth" middleware
 Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 
 Route::get('/invoices', [InvoiceController::class, 'index']);
 Route::get('/invoices/{id}', [InvoiceController::class, 'show']);
 Route::get('/albums/new', [AlbumController::class, 'create'])->name('album.create');
 Route::post('/albums', [AlbumController::class, 'store'])->name('album.store');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+});
 
 Route::get('/eloquent-playground', function() {
     // QUERYING many records from a table
