@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\AlbumController;
+use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\ProfileController;
 
 use App\Models\Track;
 use App\Models\Artist;
@@ -12,6 +14,10 @@ use App\Models\Genre;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/register', [RegistrationController::class, 'index'])->name('registration.index');
+Route::post('/register', [RegistrationController::class, 'register'])->name('registration.create');
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
 
 Route::get('/invoices', [InvoiceController::class, 'index']);
 Route::get('/invoices/{id}', [InvoiceController::class, 'show']);

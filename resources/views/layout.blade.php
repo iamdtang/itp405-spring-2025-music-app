@@ -9,6 +9,24 @@
 </head>
 <body>
   <div class="container">
+    <ul class="nav d-flex justify-content-end">
+      @if (Auth::check())
+        <li class="nav-item">
+          <a href="{{ route('profile.index') }}" class="nav-link">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a href="/logout" class="nav-link">Logout</a>
+        </li>
+      @else
+        <li class="nav-item">
+          <a href="{{ route('registration.index') }}" class="nav-link">Register</a>
+        </li>
+        <li class="nav-item">
+          <a href="/login" class="nav-link">Login</a>
+        </li>
+      @endif
+    </ul>
+
     @yield('main')
   </div>
 </body>
