@@ -18,4 +18,18 @@ class AuthController extends Controller
     {
         return view('auth.login');
     }
+
+    public function login(Request $request)
+    {
+        $loginWasSuccessful = Auth::attempt([
+            'email' => $request->input('email'),
+            'password' => $request->input('password'),
+        ]);
+
+        if ($loginWasSuccessful) {
+            return redirect()->route('profile.index');
+        } else {
+            return redirect()->route('auth.loginForm')->with('error', 'Invalid credentials.');
+        }
+    }
 }
