@@ -37,6 +37,12 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+Route::get('/mail', function () {
+     Mail::raw('What is your favorite framework?', function ($message) {
+         $message->to('david@itp405.com')->subject('Hello, David');
+     });
+ });
+
 Route::get('/eloquent-playground', function() {
     // QUERYING many records from a table
     // return Artist::all();
