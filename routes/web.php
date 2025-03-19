@@ -6,6 +6,7 @@ use App\Http\Controllers\AlbumController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
+use App\Http\Middleware\DenyBlockedUsers;
 
 use App\Models\Track;
 use App\Models\Artist;
@@ -27,8 +28,13 @@ Route::get('/albums/new', [AlbumController::class, 'create'])->name('album.creat
 Route::post('/albums', [AlbumController::class, 'store'])->name('album.store');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+    Route::middleware([DenyBlockedUsers::class])->group(function () {
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+
+        Route::view('/blocked', 'blocked')->name('blocked');
+    });
 });
 
 Route::get('/eloquent-playground', function() {
