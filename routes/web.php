@@ -7,6 +7,7 @@ use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\DenyBlockedUsers;
+use App\Mail\NewAlbum;
 
 use App\Models\Track;
 use App\Models\Artist;
@@ -41,6 +42,13 @@ Route::get('/mail', function () {
      Mail::raw('What is your favorite framework?', function ($message) {
          $message->to('david@itp405.com')->subject('Hello, David');
      });
+ });
+
+Route::get('/new-album', function () {
+     // We wouldn't normally have this route. This would happen when an artist
+     // uploads a new album.
+    $album = Album::find(150);
+    Mail::to('david@itp405.com')->send(new NewAlbum($album));
  });
 
 Route::get('/eloquent-playground', function() {
