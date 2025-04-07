@@ -28,7 +28,7 @@ class AlbumController extends Controller
         // return response()->json($paginatedAlbums->items());
 
         // Example 4:
-        return Album::simplePaginate();
+        return AlbumResource::collection(Album::simplePaginate());
     }
 
     /**
@@ -47,7 +47,9 @@ class AlbumController extends Controller
             ], 422);
         }
  
-         return Album::create($request->all());
+        $album = Album::create($request->all());
+
+        return new AlbumResource($album);
     }
 
     /**
@@ -85,7 +87,7 @@ class AlbumController extends Controller
 
         $album->update($request->all());
          
-        return $album;
+        return new AlbumResource($album);
     }
 
     /**
