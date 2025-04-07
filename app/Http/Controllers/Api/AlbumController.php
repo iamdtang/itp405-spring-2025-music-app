@@ -51,9 +51,18 @@ class AlbumController extends Controller
 
     /**
      * Display the specified resource.
+     * 
+     * Example URL: http://localhost/api/albums/6?include=tracks,artist
      */
-    public function show(Album $album)
+    public function show(Album $album, Request $request)
     {
+        if ($request->query('include')) {
+            $relationshipsToLoad = explode(',', $request->query('include'));
+
+            // ideally there'd be more checks so consumers can't load any relationship
+            $album->load($relationshipsToLoad); // $album->load(['tracks', 'artist']);
+        }
+
         return $album;
     }
 
