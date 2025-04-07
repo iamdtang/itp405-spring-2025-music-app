@@ -13,7 +13,19 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        //
+        // Example 1
+        // return Album::all();
+
+        // Example 2
+        // $paginatedAlbums = Album::paginate();
+        // return $paginatedAlbums;
+
+        // Example 3: Similar to Example 1
+        // $paginatedAlbums = Album::paginate();
+        // return response()->json($paginatedAlbums->items());
+
+        // Example 4:
+        return Album::simplePaginate();
     }
 
     /**
