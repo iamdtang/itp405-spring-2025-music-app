@@ -14,6 +14,9 @@ class TrackResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'name' => $this->Name,
+            'price' => $this->UnitPrice,
+        ];
     }
 }

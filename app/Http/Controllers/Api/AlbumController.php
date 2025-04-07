@@ -7,6 +7,7 @@ use App\Models\Album;
 use Illuminate\Http\Request;
 use Validator;
 use DB;
+use App\Http\Resources\AlbumResource;
 
 class AlbumController extends Controller
 {
@@ -63,7 +64,7 @@ class AlbumController extends Controller
             $album->load($relationshipsToLoad); // $album->load(['tracks', 'artist']);
         }
 
-        return $album;
+        return new AlbumResource($album);
     }
 
     /**
