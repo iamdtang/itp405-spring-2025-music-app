@@ -33,7 +33,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware([DenyBlockedUsers::class])->group(function () {
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-
+        Route::post('/tokens', [ProfileController::class, 'createToken'])->name('token.store');
+        Route::post('/tokens/{id}', [ProfileController::class, 'revokeToken'])->name('token.destroy');
         Route::view('/blocked', 'blocked')->name('blocked');
     });
 });
